@@ -1,0 +1,22 @@
+extends ./share/bootstrap.pug
+
+block content
+    script(src="./app.js") 
+    include ./share/navbar.pug
+    div.w-75.m-auto.py-3
+        h1 Upload
+        div.input-group.my-3
+            input.form-control(type="file" name="upload" onChange="onFileSelected()" id="upload")
+            span.input-group-text Size MB
+            button.btn.btn-primary.input-group-text Submit
+                if isLoading == true
+                    span &nbsp;
+                    span.spinner-border.spinner-border-sm 
+        h1 Gallery
+        div.row.row-cols-1.row-cols-md-2.row-cols-lg-3.row-cols-xl-4
+            if resources
+                each item in resources
+                    div.card.position-relative.p-0.m-1
+                        img(src=item.url)
+                        div.card-footer.position-absolute.bottom-0.w-100
+                            button.btn.btn-danger Remove
